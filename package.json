@@ -24,12 +24,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mindpilot-ai/platform.git"
+    "url": "https://github.com/marinirin909-lang/mindpilot-ai-platform.git"
   },
   "bugs": {
-    "url": "https://github.com/mindpilot-ai/platform/issues"
+    "url": "https://github.com/marinirin909-lang/mindpilot-ai-platform/issues"
   },
-  "homepage": "https://mindpilot-ai.com",
+  "homepage": "https://github.com/marinirin909-lang/mindpilot-ai-platform#readme",
   "devDependencies": {
     "serve": "^14.2.1"
   },
