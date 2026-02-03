@@ -1,0 +1,47 @@
+{
+  "name": "mindpilot-ai-platform",
+  "version": "1.0.0",
+  "description": "A powerful full automation AI coding platform with Puter.com integration",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve .",
+    "dev": "serve . -l 3000",
+    "build": "echo 'Build completed - static files ready'",
+    "deploy": "echo 'Deploy to your preferred platform'",
+    "test": "echo 'Run tests in browser console'"
+  },
+  "keywords": [
+    "ai",
+    "coding",
+    "automation",
+    "platform",
+    "puter",
+    "code-generation",
+    "development",
+    "full-stack"
+  ],
+  "author": "MindPilot AI Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mindpilot-ai/platform.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mindpilot-ai/platform/issues"
+  },
+  "homepage": "https://mindpilot-ai.com",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  },
+  "dependencies": {
+    "puter-js": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindPilot AI - Full Automation Coding Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://js.puter.com/v2/"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-html.min.js"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .code-editor {
+            font-family: 'Fira Code', 'Courier New', monospace;
+            background: #2d2d2d;
+            color: #f8f8f2;
+        }
+        .terminal {
+            background: #1e1e1e;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+        }
+        .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+    </style>
+    <script src="https://js.puter.com/v2/"></script>
+
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <!-- Navigation -->
+    <nav class="glass-effect fixed w-full top-0 z-50 px-6 py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-robot text-2xl text-purple-400"></i>
+                <span class="text-xl font-bold">MindPilot AI</span>
+            </div>
+            <div class="flex items-center space-x-6">
+                <button onclick="showSection('dashboard')" class="nav-btn hover:text-purple-400 transition">Dashboard</button>
+                <button onclick="showSection('editor')" class="nav-btn hover:text-purple-400 transition">Code Editor</button>
+                <button onclick="showSection('automation')" class="nav-btn hover:text-purple-400 transition">Automation</button>
+                <button onclick="showSection('projects')" class="nav-btn hover:text-purple-400 transition">Projects</button>
+                <button onclick="showSection('deploy')" class="nav-btn hover:text-purple-400 transition">Deploy</button>
+                <button onclick="initPuter()" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg transition">
+                    <i class="fas fa-cloud mr-2"></i>Connect Puter
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-20">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section min-h-screen p-8">
+            <div class="container mx-auto">
+                <div class="text-center mb-12">
+                    <h1 class="text-5xl font-bold mb-4 gradient-bg bg-clip-text text-transparent">
+                        AI-Powered Coding Platform
+                    </h1>
+                    <p class="text-xl text-gray-300">Automate your entire development workflow with AI</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+                    <div class="glass-effect rounded-xl p-6 feature-card">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-400">Projects</p>
+                                <p class="text-3xl font-bold" id="project-count">12</p>
+                            </div>
+                            <i class="fas fa-folder text-3xl text-purple-400"></i>
+                        </div>
+                    </div>
+                    <div class="glass-effect rounded-xl p-6 feature-card">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-400">Lines of Code</p>
+                                <p class="text-3xl font-bold" id="loc-count">45.2K</p>
+                            </div>
+                            <i class="fas fa-code text-3xl text-blue-400"></i>
+                        </div>
+                    </div>
+                    <div class="glass-effect rounded-xl p-6 feature-card">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-400">Deployments</p>
+                                <p class="text-3xl font-bold" id="deploy-count">28</p>
+                            </div>
+                            <i class="fas fa-rocket text-3xl text-green-400"></i>
+                        </div>
+                    </div>
+                    <div class="glass-effect rounded-xl p-6 feature-card">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-400">AI Tasks</p>
+                                <p class="text-3xl font-bold" id="ai-tasks">156</p>
+                            </div>
+                            <i class="fas fa-brain text-3xl text-pink-400"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="glass-effect rounded-xl p-6 feature-card cursor-pointer" onclick="showSection('editor')">
+                        <i class="fas fa-code text-4xl text-purple-400 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Smart Code Editor</h3>
+                        <p class="text-gray-300">AI-powered code completion and suggestions</p>
+                    </div>
+                    <div class="glass-effect rounded-xl p-6 feature-card cursor-pointer" onclick="showSection('automation')">
+                        <i class="fas fa-magic text-4xl text-blue-400 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Automation Hub</h3>
+                        <p class="text-gray-300">Automate repetitive coding tasks</p>
+                    </div>
+                    <div class="glass-effect rounded-xl p-6 feature-card cursor-pointer" onclick="showSection('deploy')">
+                        <i class="fas fa-cloud-upload-alt text-4xl text-green-400 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">One-Click Deploy</h3>
+                        <p class="text-gray-300">Deploy to multiple platforms instantly</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Code Editor Section -->
+        <section id="editor" class="section min-h-screen p-8 hidden">
+            <div class="container mx-auto">
+                <h2 class="text-3xl font-bold mb-6">AI Code Editor</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Editor Panel -->
+                    <div class="glass-effect rounded-xl p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-semibold">Code Editor</h3>
+                            <select id="language-select" class="bg-gray-800 px-3 py-1 rounded">
+                                <option value="javascript">JavaScript</option>
+                                <option value="python">Python</option>
+                                <option value="html">HTML</option>
+                                <option value="css">CSS</option>
+                            </select>
+                        </div>
+                        <textarea id="code-editor" class="code-editor w-full h-96 p-4 rounded-lg resize-none" placeholder="Start coding or ask AI to generate code..."></textarea>
+                        <div class="flex space-x-4 mt-4">
+                            <button onclick="generateCode()" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded transition">
+                                <i class="fas fa-magic mr-2"></i>AI Generate
+                            </button>
+                            <button onclick="optimizeCode()" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded transition">
+                                <i class="fas fa-bolt mr-2"></i>Optimize
+                            </button>
+                            <button onclick="debugCode()" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded transition">
+                                <i class="fas fa-bug mr-2"></i>Debug
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Output Panel -->
+                    <div class="glass-effect rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">Output & Preview</h3>
+                        <div id="output-panel" class="bg-gray-800 p-4 rounded-lg h-96 overflow-auto">
+                            <pre><code class="language-javascript" id="code-output">// Your code output will appear here</code></pre>
+                        </div>
+                        <div class="mt-4">
+                            <button onclick="runCode()" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded transition">
+                                <i class="fas fa-play mr-2"></i>Run Code
+                            </button>
+                            <button onclick="saveToPuter()" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded transition ml-2">
+                                <i class="fas fa-save mr-2"></i>Save to Puter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Automation Section -->
+        <section id="automation" class="section min-h-screen p-8 hidden">
+            <div class="container mx-auto">
+                <h2 class="text-3xl font-bold mb-6">AI Automation Hub</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Automation Cards -->
+                    <div class="glass-effect rounded-xl p-6 feature-card">
+                        <i class="fas fa-file-code text-3xl text-purple-400 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Code Generation</h3>
+                        <p class="text-gray-300 mb-4">Generate complete applications from descriptions</p>
+                        <button onclick="startAutomation('codegen')" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded transition w-full">
+                            Start Automation
+                        </button>
+                    </div>
+
+                    <div class="glass-effect rounded-xl p-6 feature-card">
+                        <i class="fas fa-bug text-3xl text-red-400 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Bug Detection</h3>
+                        <p class="text-gray-300 mb-4">Automatically find and fix bugs in your code</p>
+                        <button onclick="startAutomation('debug')" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded transition w-full">
+                            Start Automation
+                        </button>
+                    </div>
+
+                    <div class="glass-effect rounded-xl p-6 feature-card">
+                        <i class="fas fa-chart-line text-3xl text-green-400 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Performance Analysis</h3>
+                        <p class="text-gray-300 mb-4">Analyze and optimize code performance</p>
+                        <button onclick="startAutomation('performance')" class="bg-green-600 hover:bg-purple-700 px-4 py-2 rounded transition w-full">
+                            Start Automation
+                        </button>
+                    </div>
+
+                    <div class="glass-effect rounded-xl p-6 feature-card">
+                        <i class="fas fa-shield-alt text-3xl text-blue-400 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Security Audit</h3>
+                        <p class="text-gray-300 mb-4">Scan for security vulnerabilities</p>
+                        <button onclick="startAutomation('security')" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded transition w-full">
+                            Start Automation
+                        </button>
+                    </div>
+
+                    <div class="glass-effect rounded-xl p-6 feature-card">
+                        <i class="fas fa-vial text-3xl text-yellow-400 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Test Generation</h3>
+                        <p class="text-gray-300 mb-4">Auto-generate comprehensive test suites</p>
+                        <button onclick="startAutomation('testing')" class="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded transition w-full">
+                            Start Automation
+                        </button>
+                    </div>
+
+                    <div class="glass-effect rounded-xl p-6 feature-card">
+                        <i class="fas fa-book text-3xl text-pink-400 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Documentation</h3>
+                        <p class="text-gray-300 mb-4">Generate code documentation automatically</p>
+                        <button onclick="startAutomation('docs')" class="bg-pink-600 hover:bg-pink-700 px-4 py-2 rounded transition w-full">
+                            Start Automation
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Automation Status -->
+                <div class="mt-8 glass-effect rounded-xl p-6">
+                    <h3 class="text-xl font-bold mb-4">Active Automations</h3>
+                    <div id="automation-status" class="space-y-4">
+                        <div class="flex items-center justify-between p-4 bg-gray-800 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <div class="animate-spin rounded-full h-4 w-4 border-2 border-purple-400 border-t-transparent"></div>
+                                <span>Code generation in progress...</span>
+                            </div>
+                            <span class="text-gray-400">75%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section min-h-screen p-8 hidden">
+            <div class="container mx-auto">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-3xl font-bold">Project Templates</h2>
+                    <button onclick="createNewProject()" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded transition">
+                        <i class="fas fa-plus mr-2"></i>New Project
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Project Templates -->
+                    <div class="glass-effect rounded-xl p-6 feature-card cursor-pointer" onclick="selectTemplate('react')">
+                        <i class="fab fa-react text-4xl text-cyan-400 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">React App</h3>
+                        <p class="text-gray-300">Modern React application with TypeScript</p>
+                    </div>
+
+                    <div class="glass-effect rounded-xl p-6 feature-card cursor-pointer" onclick="selectTemplate('nodejs')">
+                        <i class="fab fa-node-js text-4xl text-green-400 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Node.js API</h3>
+                        <p class="text-gray-300">RESTful API with Express and MongoDB</p>
+                    </div>
+
+                    <div class="glass-effect rounded-xl p-6 feature-card cursor-pointer" onclick="selectTemplate('python')">
+                        <i class="fab fa-python text-4xl text-blue-400 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Python ML</h3>
+                        <p class="text-gray-300">Machine learning project with TensorFlow</p>
+                    </div>
+
+                    <div class="glass-effect rounded-xl p-6 feature-card cursor-pointer" onclick="selectTemplate('vue')">
+                        <i class="fab fa-vuejs text-4xl text-green-500 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Vue.js App</h3>
+                        <p class="text-gray-300">Progressive Vue.js application</p>
+                    </div>
+
+                    <div class="glass-effect rounded-xl p-6 feature-card cursor-pointer" onclick="selectTemplate('flutter')">
+                        <i class="fas fa-mobile-alt text-4xl text-purple-400 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Flutter App</h3>
+                        <p class="text-gray-300">Cross-platform mobile application</p>
+                    </div>
+
+                    <div class="glass-effect rounded-xl p-6 feature-card cursor-pointer" onclick="selectTemplate('docker')">
+                        <i class="fab fa-docker text-4xl text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Docker Setup</h3>
+                        <p class="text-gray-300">Containerized application setup</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deploy Section -->
+        <section id="deploy" class="section min-h-screen p-8 hidden">
+            <div class="container mx-auto">
+                <h2 class="text-3xl font-bold mb-6">One-Click Deployment</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Deployment Options -->
+                    <div class="glass-effect rounded-xl p-6">
+                        <h3 class="text-xl font-bold mb-4">Select Platform</h3>
+                        <div class="space-y-4">
+                            <label class="flex items-center p-4 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition">
+                                <input type="radio" name="platform" value="vercel" class="mr-3">
+                                <i class="fab fa-vercel text-2xl mr-3"></i>
+                                <div>
+                                    <p class="font-semibold">Vercel</p>
+                                    <p class="text-sm text-gray-400">Frontend deployment</p>
+                                </div>
+                            </label>
+                            
+                            <label class="flex items-center p-4 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition">
+                                <input type="radio" name="platform" value="netlify" class="mr-3">
+                                <i class="fas fa-globe text-2xl mr-3"></i>
+                                <div>
+                                    <p class="font-semibold">Netlify</p>
+                                    <p class="text-sm text-gray-400">Static site hosting</p>
+                                </div>
+                            </label>
+                            
+                            <label class="flex items-center p-4 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition">
+                                <input type="radio" name="platform" value="heroku" class="mr-3">
+                                <i class="fab fa-heroku text-2xl mr-3"></i>
+                                <div>
+                                    <p class="font-semibold">Heroku</p>
+                                    <p class="text-sm text-gray-400">Full-stack applications</p>
+                                </div>
+                            </label>
+                            
+                            <label class="flex items-center p-4 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700 transition">
+                                <input type="radio" name="platform" value="puter" class="mr-3">
+                                <i class="fas fa-cloud text-2xl mr-3"></i>
+                                <div>
+                                    <p class="font-semibold">Puter.com</p>
+                                    <p class="text-sm text-gray-400">Decentralized hosting</p>
+                                </div>
+                            </label>
+                        </div>
+                        
+                        <button onclick="deployProject()" class="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg transition w-full mt-6">
+                            <i class="fas fa-rocket mr-2"></i>Deploy Now
+                        </button>
+                    </div>
+
+                    <!-- Deployment Status -->
+                    <div class="glass-effect rounded-xl p-6">
+                        <h3 class="text-xl font-bold mb-4">Deployment Status</h3>
+                        <div id="deployment-status" class="space-y-4">
+                            <div class="p-4 bg-gray-800 rounded-lg">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-semibold">My React App</span>
+                                    <span class="text-green-400">Live</span>
+                                </div>
+                                <p class="text-sm text-gray-400">https://my-app.vercel.app</p>
+                                <div class="mt-2 bg-gray-700 rounded-full h-2">
+                                    <div class="bg-green-400 h-2 rounded-full" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Terminal Modal -->
+    <div id="terminal-modal" class="fixed inset-0 bg-black bg-opacity-75 hidden z-50 flex items-center justify-center">
+        <div class="glass-effect rounded-xl p-6 w-11/12 max-w-4xl">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold">Terminal</h3>
+                <button onclick="closeTerminal()" class="text-gray-400 hover:text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="terminal p-4 rounded-lg h-96 overflow-auto" id="terminal-content">
+                <div>$ Welcome to MindPilot AI Terminal</div>
+                <div>$ Ready for commands...</div>
+            </div>
+            <div class="flex mt-4">
+                <input type="text" id="terminal-input" class="bg-gray-800 px-4 py-2 rounded-l-lg flex-1" placeholder="Enter command...">
+                <button onclick="executeCommand()" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-r-lg">
+                    <i class="fas fa-terminal"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
